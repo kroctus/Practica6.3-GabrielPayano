@@ -91,8 +91,16 @@ public class MisVehiculos {
         nuevaEmpresa.ordenarCarteraClientes();
         nuevaEmpresa.ordenarCatalogoVehiculos();
 
+        //Realizamos una busqueda con los valores que meta el usuario
         
-
+        System.out.println("Introduce la matricula del coche que quieres buscar: ");
+        String matriBuscada= teclado.nextLine();
+        
+        System.out.println("Introduce el nif del cliente que quieres buscar: ");
+        String nifBuscado= teclado.nextLine();
+        
+        nuevaEmpresa.busquedaCliente(nifBuscado);
+        nuevaEmpresa.busquedaVehiculo(matricula);
     }
 
 }
