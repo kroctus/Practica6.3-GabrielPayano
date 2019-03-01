@@ -79,8 +79,8 @@ vehiculos puede contener hasta 100 elementos */
 
     private Cliente getCliente(String nif) {
         for (int i = 0; i < this.getTotalClientes(); i++) {
-            if (this.clientes[i].getNif().equals(nif)) {
-                return this.clientes[i];
+            if (this.clientes.get(i).getNif().equals(nif)) {
+                return this.clientes.get(i);
             }
         }
         return null;
@@ -88,8 +88,8 @@ vehiculos puede contener hasta 100 elementos */
 
     private Vehiculo getVehiculo(String matricula) {
         for (int i = 0; i < this.totalVehiculos; i++) {
-            if (this.vehiculos[i].getMatricula().equals(matricula)) {
-                return this.vehiculos[i];
+            if (this.vehiculos.get(i).getMatricula().equals(matricula)) {
+                return this.vehiculos.get(i);
             }
         }
         return null;
@@ -167,13 +167,6 @@ vehiculos puede contener hasta 100 elementos */
         this.totalClientes = totalClientes;
     }
 
-    public Cliente[] getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(Cliente[] clientes) {
-        this.clientes = clientes;
-    }
 
     public int getTotalVehiculos() {
         return totalVehiculos;
@@ -183,13 +176,8 @@ vehiculos puede contener hasta 100 elementos */
         this.totalVehiculos = totalVehiculos;
     }
 
-    public Vehiculo[] getVehiculos() {
-        return vehiculos;
-    }
-
-    public void setVehiculos(Vehiculo[] vehiculos) {
-        this.vehiculos = vehiculos;
-    }
+   
+    
 
     public int getTotalAlquileres() {
         return totalAlquileres;
