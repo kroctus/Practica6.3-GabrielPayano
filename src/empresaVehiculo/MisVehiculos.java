@@ -84,6 +84,7 @@ public class MisVehiculos {
         }catch (NullPointerException e){
              System.out.println("Los datos introducidos son erroneos");
         }
+        
         System.out.println("el total de alquileres es de: " + nuevaEmpresa.getTotalAlquileres());
         
         //Ordenamos los arrays 
