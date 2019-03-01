@@ -246,5 +246,32 @@ vehiculos puede contener hasta 100 elementos */
             }
 
         }
+    
+       //Realiza una busqueda mediante el método de la busqueda binaria de los vehiculos, recibiendo como parametro para la busqueda la matricula dle vehiculo.
+    public int busquedaVehiculo( String matricula) {
+
+        int mitad=0;
+        int izquierda = 0;
+        int derecha = vehiculos.size() - 1;
+        boolean encontrado = false;
+        while ((izquierda <= derecha) && (!encontrado)) {
+            mitad=(izquierda + derecha) / 2;
+            if (vehiculos.get(mitad).getMatricula().equals(matricula)) {
+                encontrado = true;
+            } else if (vehiculos.get(mitad).getMatricula().compareTo(matricula)>0) {
+                derecha = mitad - 1; //buscar en el trozo izquierdo
+            }else{
+		izquierda = mitad + 1; // buscar en el trozo derecho
+	}
+            }
+            if (encontrado) {
+                return mitad;
+            } else {
+                return -1;
+            }
+
+        }
+    
+    
 
     }
