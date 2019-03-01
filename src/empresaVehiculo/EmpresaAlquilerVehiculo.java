@@ -167,7 +167,6 @@ vehiculos puede contener hasta 100 elementos */
         this.totalClientes = totalClientes;
     }
 
-
     public int getTotalVehiculos() {
         return totalVehiculos;
     }
@@ -175,9 +174,6 @@ vehiculos puede contener hasta 100 elementos */
     public void setTotalVehiculos(int totalVehiculos) {
         this.totalVehiculos = totalVehiculos;
     }
-
-   
-    
 
     public int getTotalAlquileres() {
         return totalAlquileres;
@@ -201,30 +197,54 @@ vehiculos puede contener hasta 100 elementos */
         Vehiculo tmp;
         for (int i = 0; i < vehiculos.size() - 1; i++) {
             for (int j = i + 1; j < vehiculos.size(); j++) {
-                if (vehiculos.get(i).getMatricula().compareTo(vehiculos.get(j).getMatricula()) >0) {
+                if (vehiculos.get(i).getMatricula().compareTo(vehiculos.get(j).getMatricula()) > 0) {
                     tmp = vehiculos.get(i);
-                    vehiculos.set(i,vehiculos.get(j));
+                    vehiculos.set(i, vehiculos.get(j));
                     vehiculos.set(j, tmp);
                 }
             }
         }
 
     }
-    
+
     //Método de la burbuja que ordena el ArrayList de clientes mediante el nif
-    
-    public void ordenarCarteraClientes(){
-        
-             Cliente tmp;
+    public void ordenarCarteraClientes() {
+
+        Cliente tmp;
         for (int i = 0; i < clientes.size() - 1; i++) {
             for (int j = i + 1; j < clientes.size(); j++) {
-                if (clientes.get(i).getNif().compareTo(clientes.get(j).getNif()) >0) {
+                if (clientes.get(i).getNif().compareTo(clientes.get(j).getNif()) > 0) {
                     tmp = clientes.get(i);
-                    clientes.set(i,clientes.get(j));
+                    clientes.set(i, clientes.get(j));
                     clientes.set(j, tmp);
                 }
             }
         }
     }
 
-}
+    //Realiza una busqueda mediante el método de la busqueda binaria de los clientes, recibiendo como parametro para la busqueda el nif del cliente
+    public int busquedaCliente( String buscado) {
+
+        int mitad=0;
+        int izquierda = 0;
+        int derecha = clientes.size() - 1;
+        boolean encontrado = false;
+        while ((izquierda <= derecha) && (!encontrado)) {
+            mitad=(izquierda + derecha) / 2;
+            if (clientes.get(mitad).getNif().equals(buscado)) {
+                encontrado = true;
+            } else if (clientes.get(mitad).getNif().compareTo(buscado)>0) {
+                derecha = mitad - 1; //buscar en el trozo izquierdo
+            }else{
+		izquierda = mitad + 1; // buscar en el trozo derecho
+	}
+            }
+            if (encontrado) {
+                return mitad;
+            } else {
+                return -1;
+            }
+
+        }
+
+    }
