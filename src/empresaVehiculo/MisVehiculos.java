@@ -57,6 +57,22 @@ public class MisVehiculos {
             nuevaEmpresa.registrarVehiculo(aux);
             contador++;
         } while (contador < 26);
+        
+        //solicitamos al usuario los datos para un alquiler
+        Scanner teclado= new Scanner(System.in);
+        System.out.println("Introduce un nif de cliente para registrar: " );
+        String nif= teclado.nextLine();
+        System.out.println("Introduce la matricula de un vehiculo a registrar: ");
+        String matricula= teclado.nextLine();
+        System.out.println("introduce el número de días del alquiler: ");
+        teclado.nextLine(); //limpiamos el buffer
+        int dias= teclado.nextInt();
+        //Realizamos el alquiler con el método correspondiente
+        nuevaEmpresa.alquilarVehiculo(matricula, nif, dias);
+       
+        
+        
+        
 
     }
 
