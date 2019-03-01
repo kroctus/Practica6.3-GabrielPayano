@@ -59,7 +59,7 @@ public class Cliente {
     	String nombre[] = {"Pepe", "Ricardo", "Yoli", "Eduardo", "Manolo", "Felipe"};
     	String apellido[] = {"Sanchez", "Lopez", "Zubarte", "Payano", "Leon", "Montes"};
 
-    	String nifRandom = "";
+    	String nifrandom = "";
     	int dni[] = new int[8];
     	for (int i = 0; i <= dni.length - 1; i++) {
         	dni[i] = rnd.nextInt(10);
@@ -146,13 +146,12 @@ public class Cliente {
     	}
 
     	String nombreElegido = nombre[rnd.nextInt(nombre.length)];
-    	System.out.println("Nombre: " + nombreElegido);
     	String apellidoElegido = apellido[rnd.nextInt(apellido.length)];
-    	System.out.println("Apellido: " + apellidoElegido);
-    	System.out.println("Nif :"+ letra);
     	Cliente cliente = new Cliente(letra,nombreElegido,apellidoElegido);
     	return cliente;
 	}
+     
+     
 
 
 
