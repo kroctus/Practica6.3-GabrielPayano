@@ -58,20 +58,38 @@ public class MisVehiculos {
             contador++;
         } while (contador < 26);
         
+        nuevaEmpresa.imprimirClientes();
+        System.out.println("------------------------------");
+        nuevaEmpresa.imprimirVehiculos();
+        
         //solicitamos al usuario los datos para un alquiler
+        
+        System.out.println("");
+        System.out.println("El numero de alquileres es de : " + nuevaEmpresa.getTotalAlquileres());
+        
+        System.out.println("");
         Scanner teclado= new Scanner(System.in);
+        
         System.out.println("Introduce un nif de cliente para registrar: " );
         String nif= teclado.nextLine();
         System.out.println("Introduce la matricula de un vehiculo a registrar: ");
         String matricula= teclado.nextLine();
+//         teclado.nextLine();//Limpiamos el buffer
         System.out.println("introduce el número de días del alquiler: ");
-        teclado.nextLine(); //limpiamos el buffer
         int dias= teclado.nextInt();
         //Realizamos el alquiler con el método correspondiente
-        nuevaEmpresa.alquilarVehiculo(matricula, nif, dias);
-       
         
+        try{
+       nuevaEmpresa.alquilarVehiculo(matricula,nif, dias);
+        }catch (NullPointerException e){
+             System.out.println("Los datos introducidos son erroneos");
+        }
+        System.out.println("el total de alquileres es de: " + nuevaEmpresa.getTotalAlquileres());
         
+        //Ordenamos los arrays 
+        nuevaEmpresa.ordenarCarteraClientes();
+        nuevaEmpresa.ordenarCatalogoVehiculos();
+
         
 
     }
