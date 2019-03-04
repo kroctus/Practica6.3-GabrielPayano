@@ -210,27 +210,26 @@ vehiculos puede contener hasta 100 elementos */
     //Realiza una busqueda mediante el método de la busqueda binaria de los clientes, recibiendo como parametro para la busqueda el nif del cliente
     public int busquedaCliente(String buscado) {
 
-        int mitad = 0;
+      int mitad = 0;
         int izquierda = 0;
-        int derecha = clientes.size() - 1;
+        int derecha = vehiculos.size() - 1;
         boolean encontrado = false;
         while ((izquierda <= derecha) && (!encontrado)) {
             mitad = (izquierda + derecha) / 2;
-            if (clientes.get(mitad).getNif().equals(buscado)) {
+            if (vehiculos.get(mitad).getMatricula().compareTo(buscado) ==0) {
                 encontrado = true;
-            } else if (clientes.get(mitad).getNif().compareTo(buscado) > 0) {
+                 return mitad;
+            } else if (vehiculos.get(mitad).getMatricula().compareTo(buscado) > 0) {
                 derecha = mitad - 1; //buscar en el trozo izquierdo
-            } else {
+            } else if (vehiculos.get(mitad).getMatricula().compareTo(buscado) < 0) {
                 izquierda = mitad + 1; // buscar en el trozo derecho
             }
+           
         }
-        if (encontrado) {
-            return mitad;
-        } else {
-            return -1;
-        }
-
+     return -1;
+  
     }
+    
 
     //Realiza una busqueda mediante el método de la busqueda binaria de los vehiculos, recibiendo como parametro para la busqueda la matricula dle vehiculo.
     public int busquedaVehiculo(String matricula) {
@@ -241,21 +240,21 @@ vehiculos puede contener hasta 100 elementos */
         boolean encontrado = false;
         while ((izquierda <= derecha) && (!encontrado)) {
             mitad = (izquierda + derecha) / 2;
-            if (vehiculos.get(mitad).getMatricula().equals(matricula)) {
+            if (vehiculos.get(mitad).getMatricula().compareTo(matricula) ==0) {
                 encontrado = true;
+                return mitad;
             } else if (vehiculos.get(mitad).getMatricula().compareTo(matricula) > 0) {
                 derecha = mitad - 1; //buscar en el trozo izquierdo
-            } else {
+            } else if (vehiculos.get(mitad).getMatricula().compareTo(matricula) < 0) {
                 izquierda = mitad + 1; // buscar en el trozo derecho
             }
+           
         }
-        if (encontrado) {
-            return mitad;
-        } else {
-            return -1;
-        }
-
+     return -1;
+  
     }
+    
+
     
        public void rellenarCLientes() {
         for (int i = 0; i < 25; i++) {
