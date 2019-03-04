@@ -32,7 +32,7 @@ Vehiculo */
 alquileres realizados y array de almacenamiento para los objetos8
 VehiculoAlquilado */
     private int totalAlquileres;
-    private VehiculoAlquilado[] alquileres;
+    private ArrayList<VehiculoAlquilado> alquileres;
 
     // se omiten los métodos ‘get’ y ‘set’ de la clase
 /* Constructor parametrizado donde se establece que el total de clientes
@@ -50,10 +50,11 @@ vehiculos puede contener hasta 100 elementos */
         this.vehiculos = new ArrayList<>(25);// apuntan a null
 // Incialmente no hay histórico de alquileres en la empresa
         this.totalAlquileres = 0;
-        this.alquileres = new VehiculoAlquilado[100]; // apuntan a null
+        this.alquileres = new ArrayList<>(); // apuntan a null
     }
 
     public void registrarCliente(Cliente nuevo) {
+
         this.clientes.add(nuevo);
         this.totalClientes++;
     }
@@ -65,15 +66,15 @@ vehiculos puede contener hasta 100 elementos */
 
     public void imprimirClientes() {
         System.out.println("NIF cliente\tNombre\n");
-        for (Cliente cliente : clientes) {
-            System.out.println(cliente);
+        for (int i = 0; i < 25; i++) {
+            System.out.println(clientes.get(i).toString());
         }
     }
 
     public void imprimirVehiculos() {
         System.out.println("Matricula\tModelo\tColor\tImporte\tDisponible\n");
-        for (Vehiculo vehiculo : vehiculos) {
-            System.out.println(vehiculo);
+        for (int i = 0; i < 25; i++) {
+            System.out.println(vehiculos.get(i).toString());
         }
     }
 
@@ -109,17 +110,9 @@ vehiculos puede contener hasta 100 elementos */
     public void alquilarVehiculo(String matricula, String nif, int dias) {
         Cliente cliente = getCliente(nif);
         Vehiculo vehiculo = getVehiculo(matricula);
-// busca el cliente con el NIF dado en el array
-// clientes y el vehículo con la matrícula dada en el
-// array vehiculos, si el vehículo está disponible se
-// alquila con la fecha actual, que se obtiene
-// ejecutando los métodos diaHoy(), mesHoy() y
-// añoHoy(), cuya declaración no se incluye
         if (vehiculo.isDisponible()) {
             vehiculo.setDisponible(false);
-            this.alquileres[this.totalAlquileres] = new VehiculoAlquilado(cliente, vehiculo, diaHoy(), mesHoy(), añoHoy(), dias);
-
-            this.totalAlquileres++;
+            this.alquileres.add(new VehiculoAlquilado(cliente, vehiculo, diaHoy(), mesHoy(), añoHoy(), dias));
         }
     }
 
@@ -183,14 +176,6 @@ vehiculos puede contener hasta 100 elementos */
         this.totalAlquileres = totalAlquileres;
     }
 
-    public VehiculoAlquilado[] getAlquileres() {
-        return alquileres;
-    }
-
-    public void setAlquileres(VehiculoAlquilado[] alquileres) {
-        this.alquileres = alquileres;
-    }
-
     //Método que ordena el arraList de vehiculos por matricula con el método de la burbuja
     public void ordenarCatalogoVehiculos() {
 
@@ -223,55 +208,65 @@ vehiculos puede contener hasta 100 elementos */
     }
 
     //Realiza una busqueda mediante el método de la busqueda binaria de los clientes, recibiendo como parametro para la busqueda el nif del cliente
-    public int busquedaCliente( String buscado) {
+    public int busquedaCliente(String buscado) {
 
-        int mitad=0;
+        int mitad = 0;
         int izquierda = 0;
         int derecha = clientes.size() - 1;
         boolean encontrado = false;
         while ((izquierda <= derecha) && (!encontrado)) {
-            mitad=(izquierda + derecha) / 2;
+            mitad = (izquierda + derecha) / 2;
             if (clientes.get(mitad).getNif().equals(buscado)) {
                 encontrado = true;
-            } else if (clientes.get(mitad).getNif().compareTo(buscado)>0) {
+            } else if (clientes.get(mitad).getNif().compareTo(buscado) > 0) {
                 derecha = mitad - 1; //buscar en el trozo izquierdo
-            }else{
-		izquierda = mitad + 1; // buscar en el trozo derecho
-	}
-            }
-            if (encontrado) {
-                return mitad;
             } else {
-                return -1;
+                izquierda = mitad + 1; // buscar en el trozo derecho
             }
-
         }
-    
-       //Realiza una busqueda mediante el método de la busqueda binaria de los vehiculos, recibiendo como parametro para la busqueda la matricula dle vehiculo.
-    public int busquedaVehiculo( String matricula) {
+        if (encontrado) {
+            return mitad;
+        } else {
+            return -1;
+        }
 
-        int mitad=0;
+    }
+
+    //Realiza una busqueda mediante el método de la busqueda binaria de los vehiculos, recibiendo como parametro para la busqueda la matricula dle vehiculo.
+    public int busquedaVehiculo(String matricula) {
+
+        int mitad = 0;
         int izquierda = 0;
         int derecha = vehiculos.size() - 1;
         boolean encontrado = false;
         while ((izquierda <= derecha) && (!encontrado)) {
-            mitad=(izquierda + derecha) / 2;
+            mitad = (izquierda + derecha) / 2;
             if (vehiculos.get(mitad).getMatricula().equals(matricula)) {
                 encontrado = true;
-            } else if (vehiculos.get(mitad).getMatricula().compareTo(matricula)>0) {
+            } else if (vehiculos.get(mitad).getMatricula().compareTo(matricula) > 0) {
                 derecha = mitad - 1; //buscar en el trozo izquierdo
-            }else{
-		izquierda = mitad + 1; // buscar en el trozo derecho
-	}
-            }
-            if (encontrado) {
-                return mitad;
             } else {
-                return -1;
+                izquierda = mitad + 1; // buscar en el trozo derecho
             }
-
         }
-    
-    
+        if (encontrado) {
+            return mitad;
+        } else {
+            return -1;
+        }
 
     }
+    
+       public void rellenarCLientes() {
+        for (int i = 0; i < 25; i++) {
+            clientes.add(Cliente.clienteAleatorio());
+        }
+    }
+
+    public void rellenarVehiculos() {
+        for (int i = 0; i < 25; i++) {
+           vehiculos.add(Vehiculo.vehiculoAleatorio());
+        }
+    }
+
+}
