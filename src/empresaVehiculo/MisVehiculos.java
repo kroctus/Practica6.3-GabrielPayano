@@ -42,21 +42,10 @@ public class MisVehiculos {
         //Creamos una empresa de alquiler de vehiculos
         EmpresaAlquilerVehiculo nuevaEmpresa = new EmpresaAlquilerVehiculo("B-85-19657425", "empresa", "www.tuEmprersaDevehiculos.com");
 
-        //Utilizamos un bucle y los respecivos metodos para rellenar los arrays de vehiculos y clientes con 25 veces.
-        int contador = 1;
-        do {
-            Cliente aux = Cliente.clienteAleatorio();
-            nuevaEmpresa.registrarCliente(aux);
-            contador++;
-        } while (contador < 26);
+        //Rellenamos el arrays de vehiculos y de clientes con sus respectivos métodos
 
-        contador = 1;
-        do {
-
-            Vehiculo aux = Vehiculo.vehiculoAleatorio();
-            nuevaEmpresa.registrarVehiculo(aux);
-            contador++;
-        } while (contador < 26);
+        nuevaEmpresa.rellenarCLientes();
+        nuevaEmpresa.rellenarVehiculos();
         
         nuevaEmpresa.imprimirClientes();
         System.out.println("------------------------------");
@@ -90,6 +79,9 @@ public class MisVehiculos {
         //Ordenamos los arrays 
         nuevaEmpresa.ordenarCarteraClientes();
         nuevaEmpresa.ordenarCatalogoVehiculos();
+        
+        System.out.println("---------------------------------hola-------------------------------");
+        nuevaEmpresa.imprimirClientes();
 
         //Realizamos una busqueda con los valores que meta el usuario
         
